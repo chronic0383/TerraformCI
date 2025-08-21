@@ -21,5 +21,5 @@ provider "azurerm" {
 
 resource "azurerm_resource_group" "rgterraform" {
   name     = "rgterraform"
-  location = "UK East"
+  location = "UK South"
 }
