@@ -35,7 +35,7 @@ resource "azurerm_storage_account" "Terrastorage" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_virual_network" "jclabsvnet1" {
+resource "azurerm_vitrual_network" "jclabsvnet1" {
   name                = "jclabsvnet1"
   address_space       = ["10.1.0.0/16"]
   location            = azurerm_resource_group.rg.location
