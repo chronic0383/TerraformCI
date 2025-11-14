@@ -34,4 +34,10 @@ resource "azurerm_storage_account" "Terrastorage" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
-# --- IGNORE ---
+
+resource "azurerem_virual_network" "jclabsvnet1" {
+  name                = "jclabsvnet1"
+  address_space       = ["10.1.0.0/16"]
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
