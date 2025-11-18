@@ -60,7 +60,7 @@ resource "azurerm_route_table" "jclabsroutetable1" {
   route {
     name           = "routeToVnet2"
     address_prefix = "10.2.0.0/16"
-    next_hop_type  = "VirtualNetwork"
+    next_hop_type  = "VnetLocal"
   }
 }
 # End of Main.tf
