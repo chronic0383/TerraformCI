@@ -51,3 +51,4 @@ resource "azurerm_virtual_network_peering" "jclabsvnet1-to-vnet2" {
   allow_gateway_transit     = false
   use_remote_gateways       = false
 }
+# End of Main.tf
