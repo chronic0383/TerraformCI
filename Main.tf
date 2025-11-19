@@ -62,4 +62,4 @@ resource "azurerm_route_table" "jclabsroutetable1" {
     next_hop_type  = "VnetLocal"
   }
 }
-# End of Main.tf
+# End of Main
