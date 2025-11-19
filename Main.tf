@@ -28,16 +28,4 @@ resource "azurerm_virtual_network_peering" "jclabsvnet1-to-vnet2" {
   allow_gateway_transit     = false
   use_remote_gateways       = false
 }
-
-resource "azurerm_route_table" "jclabsroutetable1" {
-  name                = "jclabsroutetable1"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
-
-  route {
-    name           = "routeToVnet2"
-    address_prefix = "10.2.0.0/16"
-    next_hop_type  = "VnetLocal"
-  }
-}
 # End of Main
