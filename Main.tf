@@ -54,5 +54,11 @@ resource "azurerm_route_table" "Root1" {
 
   }
 }
+resource "azurerm_subnet_route_table_association" "name" {
+  subnet_id      = azurerm_virtual_network.vnet1.subnet[0].id
+  route_table_id = azurerm_route_table.Root1.id
+
+}
 # End of Main
+
 
