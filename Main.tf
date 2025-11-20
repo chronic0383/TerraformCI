@@ -55,7 +55,7 @@ resource "azurerm_route_table" "route1" {
   }
 }
 resource "azurerm_subnet_route_table_association" "Subnet1-RouteTable1" {
-  subnet_id      = azurerm_virtual_network.vnet1.Subnet1.id
+  subnet_id      = azurerm_virtual_network.vnet1.Subnet[1].id
   route_table_id = azurerm_route_table.route1.id
 
 }
