@@ -43,5 +43,4 @@ resource "azurerm_virtual_network_peering" "vnet1-to-vnet2" {
   allow_virtual_network_access = true
 }
 # End of Main
-#
-#
+
