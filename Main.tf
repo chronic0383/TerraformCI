@@ -12,6 +12,13 @@ resource "azurerm_storage_account" "storage1" {
   account_replication_type = "LRS"
 
 }
+
+resource "azurerm_storage_container" "tfstate" {
+  name                  = "tfstate"
+  storage_account_name  = azurerm_storage_account.storage1.name
+  container_access_type = "private"
+
+}
 # End of Main
 #
 #
