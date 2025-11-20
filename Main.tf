@@ -42,5 +42,17 @@ resource "azurerm_virtual_network_peering" "vnet1-to-vnet2" {
   use_remote_gateways          = false
   allow_virtual_network_access = true
 }
+resource "azurerm_route_table" "Root1" {
+  name                = "RouteTable1"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+
+  route {
+    name           = "routeToVnet2"
+    address_prefix = "10.2.0.0/16"
+    next_hop_type  = "Vnetlocal"
+
+  }
+}
 # End of Main
 
