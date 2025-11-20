@@ -42,7 +42,7 @@ resource "azurerm_virtual_network_peering" "vnet1-to-vnet2" {
   use_remote_gateways          = false
   allow_virtual_network_access = true
 }
-resource "azurerm_route_table" "root1" {
+resource "azurerm_route_table" "route1" {
   name                = "routeTable1"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -55,8 +55,8 @@ resource "azurerm_route_table" "root1" {
   }
 }
 resource "azurerm_subnet_route_table_association" "Subnet1-RouteTable1" {
-  subnet_id      = azurerm_subnet.Subnet1.id
-  route_table_id = azurerm_route_table.Root1.id
+  subnet_id      = azurerm_virtual_network.vnet1.Subnet1.id
+  route_table_id = azurerm_route_table.route1.id
 
 }
 # End of Main
