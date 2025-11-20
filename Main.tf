@@ -55,7 +55,7 @@ resource "azurerm_route_table" "route1" {
   }
 }
 resource "azurerm_subnet_route_table_association" "Subnet1-RouteTable1" {
-  subnet_id      = azurerm_virtual_network.vnet1.Subnet[1].id
+  subnet_id      = "/subscriptions/514baea0-027d-4c91-a0b1-f5f162343306/resourceGroups/rg-jclabs-prod/providers/Microsoft.Network/virtualNetworks/Vnet1uks/subnets/Subnet1"
   route_table_id = azurerm_route_table.route1.id
 
 }
