@@ -17,6 +17,8 @@ resource "random_string" "resource_suffix" {
   special = false
 }
 
+data "azurerm_client_config" "current" {
+}
 
 resource "azurerm_key_vault" "main" {
   name                        = "kv-${var.application_name}-${var.environment_name}-${random_string.resource_suffix.result}"
