@@ -16,7 +16,7 @@ resource "azurerm_key_vault" "example" {
     # Allow specific IP ranges
     ip_rules = [
       "203.0.113.10",
-      "198.51.100.25",
+      "198.51.100.25/28",
     "198.51.100.26"]
   }
 }
