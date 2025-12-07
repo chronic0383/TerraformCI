@@ -8,23 +8,22 @@ resource "azurerm_key_vault" "example" {
   purge_protection_enabled    = false
 
   sku_name = "standard"
+
+  network_acls {
+    default_action = "Deny"
+    bypass         = "AzureServices"
+
+    # Allow specific IP ranges
+    ip_rules = [
+      "203.0.113.10",
+      "198.51.100.25",
+      "198.51.100.26"
+    ]
+
+    # Allow specific virtual networks (optional)
+    virtual_network_subnet_ids = [
+      azurerm_subnet.example.id
+    ]
+  }
 }
-# Firewall rules via network_acls
-network_acls {
-  default_action = "Deny"
-  bypass         = "AzureServices"
-
-  # Allow specific IP ranges
-  ip_rules = [
-    "203.0.113.10",
-    "198.51.100.25",
-    "198.51.100.26"
-  ]
-
-  # Allow specific virtual networks (optional)
-  virtual_network_subnet_ids = [
-    azurerm_subnet.example.id
-  ]
-}
-
 
