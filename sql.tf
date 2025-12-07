@@ -15,7 +15,7 @@ resource "azurerm_mssql_firewall_rule" "IP1" {
 }
 
 resource "azurerm_mssql_firewall_rule" "IP2" {
-  name             = "FirewallRule1"
+  name             = "FirewallRule2"
   server_id        = azurerm_mssql_server.example.id
   start_ip_address = "10.0.18.62"
   end_ip_address   = "10.0.18.62"
