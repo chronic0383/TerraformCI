@@ -6,16 +6,12 @@ resource "azurerm_storage_account" "example" {
   account_replication_type = "LRS"
 }
 
-resource "azurerm_app_service_plan" "example" {
-  name                = "functionappjclabsplan1"
-  location            = azurerm_resource_group.rg.location
+resource "azurerm_service_plan" "example" {
+  name                = "jclabs-app-service-plan"
   resource_group_name = azurerm_resource_group.rg.name
-  kind                = "FunctionApp"
-
-  sku {
-    tier = "Dynamic"
-    size = "Y1"
-  }
+  location            = azurerm_resource_group.rg.location
+  os_type             = "Windows"
+  sku_name            = "Y1"
 }
 
 resource "azurerm_windows_function_app" "example" {
