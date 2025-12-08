@@ -25,7 +25,7 @@ resource "azurerm_windows_function_app" "example" {
 
   site_config {
     ip_restriction {
-      ip_address = "86.162.82.32"
+      ip_address = "86.162.82.32/32"
       priority   = 100
       name       = "ETEL FW IP ONLY"
     }
