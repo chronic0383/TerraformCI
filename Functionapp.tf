@@ -23,25 +23,17 @@ resource "azurerm_windows_function_app" "example" {
   storage_account_access_key = azurerm_storage_account.example.primary_access_key
   service_plan_id            = azurerm_service_plan.example.id
 
-  site_config {}
+  site_config {
+    ip_restriction {
+      ip_address = "86.162.82.32"
+      priority   = 100
+      name       = "ETEL FW IP ONLY"
+    }
+    ip_restriction {
+      ip_address = "0.0.0.0/0"
+      priority   = 200
+      name       = "Block all"
+    }
+  }
 }
-# Add IP-based access restrictions
-resource "azurerm_windows_function_app_function_app_http_allowed_ip_restriction" "example" {
-  function_app_id = azurerm_windows_function_app.example.id
 
-  # Allow specific IPs only
-  ip_address = "86.162.82.32/32" # Your allowed IP
-  priority   = 100
-  action     = "Allow"
-  name       = "AllowSpecificIP"
-}
-
-# Deny all other public access
-resource "azurerm_windows_function_app_function_app_http_allowed_ip_restriction" "deny_all" {
-  function_app_id = azurerm_windows_function_app.example.id
-
-  ip_address = "*"
-  priority   = 200
-  action     = "Deny"
-  name       = "DenyAllOthers"
-}
