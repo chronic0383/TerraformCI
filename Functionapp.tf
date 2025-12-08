@@ -33,6 +33,7 @@ resource "azurerm_windows_function_app" "example" {
       ip_address = "0.0.0.0/0"
       priority   = 200
       name       = "Block all"
+      action     = "Deny"
     }
   }
 }
