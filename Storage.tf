@@ -4,15 +4,4 @@ resource "azurerm_storage_account" "storage1" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
-
-  network_rules {
-    default_action = "Deny"
-    bypass         = ["AzureServices"]
-
-    # Restrict to specific public IPs
-    ip_rules = [
-      "203.0.113.10",
-      "198.51.100.0/24",
-    "86.162.82.32"]
-  }
 }
