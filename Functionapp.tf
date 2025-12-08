@@ -25,3 +25,23 @@ resource "azurerm_windows_function_app" "example" {
 
   site_config {}
 }
+# Add IP-based access restrictions
+resource "azurerm_function_app_function_app_http_allowed_ip_restriction" "example" {
+  function_app_id = azurerm_windows_function_app.example.id
+
+  # Allow specific IPs only
+  ip_address = "86.162.82.32/32" # Your allowed IP
+  priority   = 100
+  action     = "Allow"
+  name       = "AllowSpecificIP"
+}
+
+# Deny all other public access
+resource "azurerm_function_app_function_app_http_allowed_ip_restriction" "deny_all" {
+  function_app_id = azurerm_windows_function_app.example.id
+
+  ip_address = "*"
+  priority   = 200
+  action     = "Deny"
+  name       = "DenyAllOthers"
+}
