@@ -12,13 +12,15 @@ resource "azurerm_storage_account" "storage1" {
     # Restrict to specific public IPs
     ip_rules = [
       "203.0.113.10",
-    "198.51.100.0/24"]
-
+      "198.51.100.0/24",
+    "86.162.82.32"]
   }
 }
-//resource "azurerm_storage_container" "tfstate" {
-// name                  = "tfstate"
-//storage_account_name  = azurerm_storage_account.storage1.name
-//container_access_type = "private"
-//
+resource "azurerm_storage_container" "tfstate" {
+  name                  = "tfstate"
+  storage_account_name  = azurerm_storage_account.storage1.name
+  container_access_type = "private"
+}
+
+
 
