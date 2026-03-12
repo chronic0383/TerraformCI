@@ -42,6 +42,10 @@
 #       with:
 #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+
 name: 'Terraform'
 
 on:
