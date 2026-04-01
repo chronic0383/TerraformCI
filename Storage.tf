@@ -5,3 +5,8 @@ resource "azurerm_storage_account" "storage1" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
+resource "azurerm_storage_container" "backup" {
+  name                  = "app-backups"
+  storage_account_name  = azurerm_storage_account.backup.name
+  container_access_type = "private"
+}
