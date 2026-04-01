@@ -7,6 +7,6 @@ resource "azurerm_storage_account" "storage1" {
 }
 resource "azurerm_storage_container" "backup" {
   name                  = "app-backups"
-  storage_account_name  = azurerm_storage_account.backup.name
+  storage_account_name  = azurerm_storage_account.storage1.name
   container_access_type = "private"
 }
