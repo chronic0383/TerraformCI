@@ -28,24 +28,18 @@ resource "azurerm_app_service" "example" {
       action     = "Deny"
     }
   }
-}
-# Custom backup configuration
-resource "azurerm_app_service_backup" "example" {
-  name                = "backup"
-  resource_group_name = azurerm_resource_group.rg.name
-  app_service_name    = azurerm_app_service.example.name
 
-  storage_account_url = azurerm_storage_container.backup.id
+  backup {
+    name                = "daily-backup"
+    storage_account_url = azurerm_storage_account.storage1.name
 
-  schedule {
-    frequency_interval    = 1 # Every 1 day
-    frequency_unit        = "Day"
-    retention_period_days = 7                       # Keep backups for 7 days
-    start_time            = "2026-04-01T022:00:00Z" # UTC time
+    schedule {
+      frequency_interval       = 1
+      frequency_unit           = "Day"
+      keep_at_least_one_backup = true
+      retention_period_in_days = 30
+    }
   }
-
-  enabled = true
-
-
 }
+
 
