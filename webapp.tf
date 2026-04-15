@@ -28,18 +28,6 @@ resource "azurerm_app_service" "example" {
       action     = "Deny"
     }
   }
-
-  backup {
-    name                = "daily-backup"
-    storage_account_url = azurerm_storage_account.storage1.name
-
-    schedule {
-      frequency_interval       = 1
-      frequency_unit           = "Day"
-      keep_at_least_one_backup = true
-      retention_period_in_days = 30
-    }
-  }
 }
 
 
