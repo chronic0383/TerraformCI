@@ -39,19 +39,21 @@ resource "azapi_resource" "foundry" {
       allowProjectManagement = true
       publicNetworkAccess    = "Enabled"
       customSubDomainName    = "jclabsaifoundry"
-      
+
       # Attach Key Vault
       encryption = {
         keyVaultProperties = {
           keyVaultUri = data.azurerm_key_vault.existing.vault_uri
-    }
-  }
-   # Attach Application Insights
-  diagnosticSettings = {
+        }
+      }
+      # Attach Application Insights
+      diagnosticSettings = {
         applicationInsights = {
           instrumentationKey = data.azurerm_application_insights.existing.instrumentation_key
         }
       }
+    }
+  }
 
   identity {
     type = "SystemAssigned"
