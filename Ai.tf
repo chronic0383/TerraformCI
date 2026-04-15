@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "ai_foundry_rg" {
 
 # Create AI Foundry resource
 resource "azapi_resource" "foundry" {
-  type      = "Microsoft.CognitiveServices/accounts@2023-05-01"
+  type      = "Microsoft.CognitiveServices/accounts@2025-12-01"
   name      = "jclabsaifoundry"
   location  = azurerm_resource_group.ai_foundry_rg.location
   parent_id = azurerm_resource_group.ai_foundry_rg.id
