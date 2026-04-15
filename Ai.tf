@@ -39,7 +39,9 @@ resource "azapi_resource" "project" {
   schema_validation_enabled = false
 
   body = {
-    properties = {}
+    properties = {
+      allowProjectManagement = true
+    }
   }
 
   identity {
