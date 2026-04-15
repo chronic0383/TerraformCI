@@ -26,6 +26,6 @@ resource "azurerm_cognitive_account_project" "main" {
   cognitive_account_id = azurerm_cognitive_account.foundry.id
   location             = azurerm_resource_group.ai_foundry_rg.location
   identity {
-    type = "systemAssigned"
+    type = "SystemAssigned"
   }
 }
