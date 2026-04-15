@@ -6,12 +6,14 @@ resource "azurerm_resource_group" "ai_foundry_rg" {
 
 # Data source to reference existing Key Vault
 data "azurerm_key_vault" "existing" {
-  id = "/subscriptions/514baea0-027d-4c91-a0b1-f5f162343306/resourceGroups/rg-jclabs-prod/providers/Microsoft.KeyVault/vaults/jclabstestkeyv"
+  name                = "jclabstestkeyv"
+  resource_group_name = "rg-jclabs-prod"
 }
 
 # Data source to reference existing Application Insights
 data "azurerm_application_insights" "existing" {
-  id = "/subscriptions/514baea0-027d-4c91-a0b1-f5f162343306/resourceGroups/tf-test/providers/microsoft.insights/components/tf-test-appinsights"
+  name                = "tf-test-appinsights"
+  resource_group_name = "tf-test"
 }
 
 # Create AI Foundry resource
@@ -26,4 +28,21 @@ resource "azurerm_ai_studio" "main" {
 
   # Reference existing Application Insights
   application_insights_id = data.azurerm_application_insights.existing.id
+
+  # Enable system-assigned managed identity
+  identity {
+    type = "SystemAssigned"
+  }
 }
+
+# Create AI Foundry Project
+resource "azurerm_ai_studio_project" "main" {
+  name                = "jclabs-test"
+  resource_group_name = azurerm_resource_group.ai_foundry_rg.name
+  location            = azurerm_resource_group.ai_foundry_rg.location
+  ai_studio_id        = azurerm_ai_studio.main.id
+  friendly_name       = "jclabs-test"
+  display_name        = "jclabs-test"
+  description         = "AI Foundry Test Project"
+}
+
