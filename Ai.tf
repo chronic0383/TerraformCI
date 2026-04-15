@@ -11,6 +11,8 @@ resource "azapi_resource" "foundry" {
   location  = azurerm_resource_group.ai_foundry_rg.location
   parent_id = azurerm_resource_group.ai_foundry_rg.id
 
+  schema_validation_enabled = false
+
   body = {
     kind = "AIServices"
     sku = {
