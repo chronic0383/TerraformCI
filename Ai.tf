@@ -8,16 +8,16 @@ resource "azurerm_resource_group" "ai_foundry_rg" {
 # Existing Key Vault
 # -----------------------------
 data "azurerm_key_vault" "existing" {
-  name                = "jclabaifoundrykey"
-  resource_group_name = "AIFoundrytestlab1"
+  name                = "jclabstestkeyv"
+  resource_group_name = "rg-jclabs-prod"
 }
 
 # -----------------------------
 # Existing Application Insights
 # -----------------------------
 data "azurerm_application_insights" "existing" {
-  name                = "aifoundrytestlab1"
-  resource_group_name = "AIFoundrytestlab1"
+  name                = "tf-test-appinsights"
+  resource_group_name = "tf-test"
 }
 
 
