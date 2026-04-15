@@ -21,6 +21,7 @@ resource "azapi_resource" "foundry" {
     properties = {
       allowProjectManagement = true
       publicNetworkAccess    = "Enabled"
+      customSubDomainName    = "jclabsaifoundry"
     }
   }
 
