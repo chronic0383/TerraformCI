@@ -11,7 +11,7 @@ resource "azapi_resource" "foundry" {
   location  = azurerm_resource_group.ai_foundry_rg.location
   parent_id = azurerm_resource_group.ai_foundry_rg.id
 
-  body = jsonencode({
+  body = {
     kind = "AIServices"
     sku = {
       name = "S0"
@@ -20,7 +20,7 @@ resource "azapi_resource" "foundry" {
       allowProjectManagement = true
       publicNetworkAccess    = "Enabled"
     }
-  })
+  }
 
   identity {
     type = "SystemAssigned"
