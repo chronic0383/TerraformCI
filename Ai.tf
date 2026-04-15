@@ -5,27 +5,32 @@ resource "azurerm_resource_group" "ai_foundry_rg" {
 }
 
 # Create AI Foundry resource
-resource "azurerm_cognitive_account" "foundry" {
-  name                = "jclabsaifoundry"
-  location            = azurerm_resource_group.ai_foundry_rg.location
-  resource_group_name = azurerm_resource_group.ai_foundry_rg.name
+resource "azapi_resource" "foundry" {
+  type      = "Microsoft.CognitiveServices/accounts@2023-05-01"
+  name      = "jclabsaifoundry"
+  location  = azurerm_resource_group.ai_foundry_rg.location
+  parent_id = azurerm_resource_group.ai_foundry_rg.id
 
-  kind     = "AIServices"
-  sku_name = "S0"
-  allow_project_management = true
+  body = jsonencode({
+    kind = "AIServices"
+    sku = {
+      name = "S0"
+    }
+    properties = {
+      allowProjectManagement = true
+      publicNetworkAccess    = "Enabled"
+    }
+  })
 
   identity {
     type = "SystemAssigned"
   }
-
-  public_network_access_enabled = true
-
 }
 
 # Create AI Foundry Project
 resource "azurerm_cognitive_account_project" "main" {
   name                 = "jclabs-test"
-  cognitive_account_id = azurerm_cognitive_account.foundry.id
+  cognitive_account_id = azapi_resource.foundry.id
   location             = azurerm_resource_group.ai_foundry_rg.location
 
   identity {
