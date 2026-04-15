@@ -48,3 +48,4 @@ resource "azapi_resource" "project" {
     type = "SystemAssigned"
   }
 }
+#
