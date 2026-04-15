@@ -31,7 +31,7 @@ resource "azapi_resource" "foundry" {
 
 # Create AI Foundry Project
 resource "azapi_resource" "project" {
-  type      = "Microsoft.CognitiveServices/accounts/projects@2024-05-01-preview"
+  type      = "Microsoft.CognitiveServices/accounts/projects@2023-05-01"
   name      = "jclabs-test"
   parent_id = azapi_resource.foundry.id
   location  = azurerm_resource_group.ai_foundry_rg.location
