@@ -20,4 +20,12 @@ resource "azurerm_cognitive_account" "foundry" {
   public_network_access_enabled = true
 }
 
-
+# Create AI Foundry Project
+resource "azurerm_cognitive_account_project" "main" {
+  name                 = "jclabs-test"
+  cognitive_account_id = azurerm_cognitive_account.foundry.id
+  location             = azurerm_resource_group.ai_foundry_rg.location
+  identity {
+    type = "systemAssigned"
+  }
+}
