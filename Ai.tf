@@ -4,6 +4,23 @@ resource "azurerm_resource_group" "ai_foundry_rg" {
   location = "uksouth"
 }
 
+# -----------------------------
+# Existing Key Vault
+# -----------------------------
+data "azurerm_key_vault" "existing" {
+  name                = "jclabaifoundrykey"
+  resource_group_name = "AIFoundrytestlab1"
+}
+
+# -----------------------------
+# Existing Application Insights
+# -----------------------------
+data "azurerm_application_insights" "existing" {
+  name                = "aifoundrytestlab1"
+  resource_group_name = "AIFoundrytestlab1"
+}
+
+
 # Create AI Foundry resource
 resource "azapi_resource" "foundry" {
   type      = "Microsoft.CognitiveServices/accounts@2025-12-01"
@@ -22,8 +39,19 @@ resource "azapi_resource" "foundry" {
       allowProjectManagement = true
       publicNetworkAccess    = "Enabled"
       customSubDomainName    = "jclabsaifoundry"
+      
+      # Attach Key Vault
+      encryption = {
+        keyVaultProperties = {
+          keyVaultUri = data.azurerm_key_vault.existing.vault_uri
     }
   }
+   # Attach Application Insights
+  diagnosticSettings = {
+        applicationInsights = {
+          instrumentationKey = data.azurerm_application_insights.existing.instrumentation_key
+        }
+      }
 
   identity {
     type = "SystemAssigned"
