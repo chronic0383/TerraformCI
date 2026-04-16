@@ -79,4 +79,31 @@ resource "azapi_resource" "project" {
     type = "SystemAssigned"
   }
 }
-#
+
+# -----------------------------------------
+# Key Vault RBAC for AI Foundry Workspace
+# -----------------------------------------
+
+# Secrets User role
+resource "azurerm_role_assignment" "foundry_kv_secrets" {
+  scope              = data.azurerm_key_vault.existing.id
+  role_definition_id = "/providers/Microsoft.Authorization/roleDefinitions/4633458b-17de-408a-b874-0445c86b69e6"
+  principal_id       = azapi_resource.foundry.identity[0].principal_id
+}
+
+# Optional: Crypto User role (only if using CMK encryption)
+resource "azurerm_role_assignment" "foundry_kv_crypto" {
+  scope              = data.azurerm_key_vault.existing.id
+  role_definition_id = "/providers/Microsoft.Authorization/roleDefinitions/14b46e9e-c2b7-41b4-b07b-48a6ebf60603"
+  principal_id       = azapi_resource.foundry.identity[0].principal_id
+}
+
+# -----------------------------------------
+# Key Vault RBAC for AI Foundry Project
+# -----------------------------------------
+
+resource "azurerm_role_assignment" "project_kv_secrets" {
+  scope              = data.azurerm_key_vault.existing.id
+  role_definition_id = "/providers/Microsoft.Authorization/roleDefinitions/4633458b-17de-408a-b874-0445c86b69e6"
+  principal_id       = azapi_resource.project.identity[0].principal_id
+}
