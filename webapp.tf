@@ -22,11 +22,18 @@ resource "azurerm_app_service" "example" {
       name       = "ETEL FW IP ONLY"
     }
     ip_restriction {
+      name        = "Allow Azure Services"
+      priority    = 110
+      service_tag = "AzureCloud"
+      action      = "Allow"
+    }
+    ip_restriction {
       ip_address = "0.0.0.0/0"
       priority   = 200
       name       = "Block all"
       action     = "Deny"
     }
+
   }
 }
 
