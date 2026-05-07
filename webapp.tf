@@ -20,6 +20,7 @@ resource "azurerm_app_service" "example" {
       ip_address = "86.162.82.32/32"
       priority   = 100
       name       = "ETEL FW IP ONLY"
+      action     = "Allow"
     }
     ip_restriction {
       name        = "Allow Azure Services"
